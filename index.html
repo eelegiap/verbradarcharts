@@ -1,0 +1,109 @@
+<meta charset="utf-8">
+<title>Verb Radar Charts</title>
+<style>
+    h2 {
+        color: #777777
+    }
+
+    #main-content {
+        padding: 50px;
+    }
+    iframe.previewhtml {
+        /* border: 1px solid #ccc; */
+        padding: 5px;
+        width: 100%;
+        min-height: 15px;
+        max-width: 100%;
+        overflow: auto;
+    }
+
+    #contentinput {
+        overflow: auto;
+        resize: vertical;
+        /* border-bottom: 5px #ccc; */
+    }
+
+    textarea#outputhtml {
+        white-space: pre;
+        width: 250px;
+        min-height: 15px;
+        /* border: 1px solid #888; */
+        padding: 5px;
+        outline: none;
+        overflow: auto;
+        font-size: 30px;
+        font-family: Monaco, courier;
+    }
+    .legend {
+        font-size: 15px;
+        font-family: sans-serif;
+    }
+
+    .tooltip {
+        font-size: 15px;
+        font-family: sans-serif;
+    }
+
+    button {
+        margin-right: 45px;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="d3-5.15.0/d3.min.js"></script>
+<script src='verb_radar_chart.js'></script>
+<div id='main-content'>
+    <a name="top"></a>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 mt-3">
+            <h2>Verb Radar Charts</h2>
+            <p style="color: gray">
+                Word counts collected from the Morphological Standard Russian National Corpus, 2020,
+                <a href="https://ruscorpora.ru/new/en/index.html">https://ruscorpora.ru/new/en/index.html</a>.
+            </p>
+            <p>Words to try: пройти, смотреть, нравиться, есть, быть, взять</p>
+            <textarea id="contentinput" placeholder="Enter verb to generate radar chart"
+                style="min-height:25px; width: 100%;"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <br>
+            <div class="form-group">
+                <button type="button" class="formbtn btn btn-lg btn-primary mt-2 mb-2" id="makechart">
+                    Generate chart<i id="processing_indicator" class="spinner-border" role="status"
+                        style="display:none;"></i></button>
+                <button type="button" class="formbtn btn btn-lg btn-primary mt-2 mb-2" id="update">
+                    Update chart with details
+                    <i id="processing_indicator" class="spinner-border" role="status" style="display:none;"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="background-color: white">
+        <div class="col-md-1"></div>
+        <div class="col-md-4 mt-3">
+            <div id="output" style="display: none">
+                <br>
+                <span id='lemma-text'>Distribution of <span id='lemma' style="font-weight: bold"></span> (<span id="total"></span>
+                    occurrences in abridged RNC)</span>
+                <!-- <span style="float: left">
+                    <h5 style="color: black">Total occurrences: <span id="total"></span></h5>
+                    <h5 class='gray'>Past: <span id='past'></span></h5>
+                    <h5 class='gray'>Present: <span id='present'></span></h5>
+                    <h5 class='gray'>Future: <span id='future'></span></h5>
+                </span> -->
+            </div>
+            <div id="error" style="color: gray; display: none">
+                <h5>Word not found in the database.</h5>
+                <h5>Try the infinitive form of the verb or an alternate spelling.</h5>
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-12'>
+            <div id="chart"></div>
+        </div>
+    </div>
+</div>
