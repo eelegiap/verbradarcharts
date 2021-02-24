@@ -436,6 +436,19 @@
             draw_skeleton(data, lemma_lookup);
             $("#makechart").on("click", function () { make_radar(data, lemma_lookup, 'simple') });
             $('#update').on('click', function () { make_radar(data, lemma_lookup, 'detailed') })
+
+            $('#contentinput').keydown(function (event) {
+                let keyPressed = event.keyCode || event.which;
+                // enter
+                if (keyPressed === 13) {
+                    make_radar(data, lemma_lookup, 'simple')
+                    event.preventDefault();
+                }
+                // space
+                if (keyPressed == 32) {
+                    event.preventDefault()
+                }
+            });
         });
     });
 
