@@ -434,19 +434,35 @@
                 lemma_lookup[lemma] = key;
             }
             draw_skeleton(data, lemma_lookup);
-            $("#makechart").on("click", function () { make_radar(data, lemma_lookup, 'simple') });
-            $('#update').on('click', function () { make_radar(data, lemma_lookup, 'detailed') })
+            $("#simple").on("click", function () { make_radar(data, lemma_lookup, 'simple') });
+            $('#detailed').on('click', function () { make_radar(data, lemma_lookup, 'detailed') })
 
+            var previous_input = ''
             $('#contentinput').keydown(function (event) {
                 let keyPressed = event.keyCode || event.which;
                 // enter
                 if (keyPressed === 13) {
-                    make_radar(data, lemma_lookup, 'simple')
+                    if ($('#simple').css('display') == 'block') {
+                        make_radar(data, lemma_lookup, 'simple')
+                        $('#simple').css('display', 'none')
+                        $('#detailed').css('display', 'block')
+                        previous_input = $('#contentinput').val()
+                        
+                    } else {
+                        make_radar(data, lemma_lookup, 'detailed')
+                        $('#detailed').css('display', 'none')
+                        $('#simple').css('display', 'block')
+                        previous_input = $('#contentinput').val()
+                    }
                     event.preventDefault();
                 }
                 // space
-                if (keyPressed == 32) {
+                else if (keyPressed == 32) {
                     event.preventDefault()
+                }
+                else {
+                    $('#detailed').css('display', 'none')
+                    $('#simple').css('display', 'block')
                 }
             });
         });
