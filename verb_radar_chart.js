@@ -399,8 +399,7 @@ $(document).ready(async function () {
             var lemma = data[key]["lemma"]
             lemma_lookup[lemma] = key;
         }
-        make_radar(data, lemma_lookup, 'simple')
-        // draw_skeleton(data, lemma_lookup);
+        draw_skeleton(data, lemma_lookup);
         $("#makechart").on("click", function () { make_radar(data, lemma_lookup, 'simple') });
         $('#update').on('click', function () { make_radar(data, lemma_lookup, 'detailed') })
     });
