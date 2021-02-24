@@ -161,6 +161,10 @@
                 Object.keys(chart_data[0]).forEach(function (index) {
                     if (chart_data[0][index].axis == thisForm) {
                         thisVal = chart_data[0][index].value;
+                    } else if (chart_data[0][index].axis.includes('conjugated')) {
+                        if (thisForm.includes('present') || thisForm.includes('future')) {
+                            thisVal = chart_data[0][index].value;
+                        }
                     }
                 })
 
