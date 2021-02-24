@@ -76,10 +76,10 @@
             <br>
             <div class="form-group">
                 <button type="button" class="formbtn btn btn-lg btn-primary mt-2 mb-2" id="makechart">
-                    Generate chart<i id="processing_indicator" class="spinner-border" role="status"
+                    Generate basic chart<i id="processing_indicator" class="spinner-border" role="status"
                         style="display:none;"></i></button>
                 <button type="button" class="formbtn btn btn-lg btn-primary mt-2 mb-2" id="update">
-                    Update chart with details
+                    Generate detailed chart
                     <i id="processing_indicator" class="spinner-border" role="status" style="display:none;"></i></button>
             </div>
         </div>
@@ -89,14 +89,8 @@
         <div class="col-md-4 mt-3">
             <div id="output" style="display: none">
                 <br>
-                <span id='lemma-text'>Distribution of <span id='lemma' style="font-weight: bold"></span> (<span id="total"></span>
-                    occurrences in abridged RNC)</span>
-                <!-- <span style="float: left">
-                    <h5 style="color: black">Total occurrences: <span id="total"></span></h5>
-                    <h5 class='gray'>Past: <span id='past'></span></h5>
-                    <h5 class='gray'>Present: <span id='present'></span></h5>
-                    <h5 class='gray'>Future: <span id='future'></span></h5>
-                </span> -->
+                <span id='lemma-text' style='float: left'>Distribution of <span id='lemma' style="font-weight: bold"></span> (<span id="total"></span> occurrences in abridged RNC)</span>
+                <span id='aspect-text' style='float: right'>Aspect: <span id='aspect' style="font-weight: bold"></span></span>
             </div>
             <div id="error" style="color: gray; display: none">
                 <h5>Word not found in the database.</h5>
