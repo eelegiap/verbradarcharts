@@ -427,6 +427,8 @@
         console.log("ready!");
         $("#output").hide();
         $.getJSON("all-data_2-24.json", function (data) {
+            var previous_input = ''
+
             // create lookup from lemma to array number to avoid looping every time
             var lemma_lookup = new Object();
             for (var key in data) {
@@ -434,10 +436,19 @@
                 lemma_lookup[lemma] = key;
             }
             draw_skeleton(data, lemma_lookup);
-            $("#simple").on("click", function () { make_radar(data, lemma_lookup, 'simple') });
-            $('#detailed').on('click', function () { make_radar(data, lemma_lookup, 'detailed') })
+            $("#simple").on("click", function () { 
+                make_radar(data, lemma_lookup, 'simple');
+                $('#simple').css('display', 'none')
+                $('#detailed').css('display', 'block')
+                previous_input = $('#contentinput').val()
+             });
+            $('#detailed').on('click', function () { 
+                make_radar(data, lemma_lookup, 'detailed'); 
+                $('#detailed').css('display', 'none')
+                $('#simple').css('display', 'block')
+                previous_input = $('#contentinput').val()
+            })
 
-            var previous_input = ''
             $('#contentinput').keydown(function (event) {
                 let keyPressed = event.keyCode || event.which;
                 // enter
