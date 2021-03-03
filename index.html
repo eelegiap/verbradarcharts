@@ -11,8 +11,8 @@
         padding-top: 10px;
         font-size: medium;
     }
+
     iframe.previewhtml {
-        /* border: 1px solid #ccc; */
         padding: 5px;
         width: 100%;
         min-height: 15px;
@@ -37,12 +37,13 @@
         font-size: 20px;
         font-family: Monaco, courier;
     }
+
     .legend {
         font-size: 15px;
         font-family: sans-serif;
     }
 
-    .tooltip{
+    .tooltip {
         font-size: 15px;
         font-family: sans-serif;
     }
@@ -50,15 +51,27 @@
     button {
         margin-right: 45px;
     }
+
+    svg {
+        display: inline-block;
+    }
 </style>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="d3-5.15.0/d3.min.js"></script>
-<script src='verb_radar_chart.js'></script>
+
 <div id='main-content'>
     <a name="top"></a>
     <div class="row">
-        <div class="col-md-1"></div>
+        <!-- <div class="col-md-1"></div> -->
         <div class="col-md-10 mt-3">
             <h2>Verb Radar Charts</h2>
             <p style="color: gray">
@@ -71,37 +84,33 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-1"></div>
+        <!-- <div class="col-md-1"></div> -->
         <div class="col-md-10">
             <br>
             <div class="form-group">
-                <button style='display: block' type="button" class="formbtn btn btn-lg btn-primary mt-2 mb-2" id="simple">
-                    Generate <span style='font-weight: bold;'>basic</span> chart<i id="processing_indicator" class="spinner-border" role="status"
-                        style="display:none;"></i></button>
-                <button style='display: none' type="button" class="formbtn btn btn-lg btn-primary mt-2 mb-2" id="detailed">
+                <button style='display: block' type="button" class="formbtn btn btn-lg btn-primary mt-2 mb-2"
+                    id="simple">
+                    Generate <span style='font-weight: bold;'>basic</span> chart<i id="processing_indicator"
+                        class="spinner-border" role="status" style="display:none;"></i></button>
+                <button style='display: none' type="button" class="formbtn btn btn-lg btn-primary mt-2 mb-2"
+                    id="detailed">
                     Generate <span style='font-weight: bold;'>detailed</span> chart
-                    <i id="processing_indicator" class="spinner-border" role="status" style="display:none;"></i></button>
+                    <i id="processing_indicator" class="spinner-border" role="status"
+                        style="display:none;"></i></button>
+                <span id="error" style="color: tomato; display: none">Word not found in the database. Try the infinitive
+                    form of the verb or an alternate spelling.</span>
             </div>
         </div>
     </div>
-    <div class="row" style="background-color: white">
-        <div class="col-md-1"></div>
-        <div class="col-md-4 mt-3">
-            <div id="output" style="display: none;">
-                <br>
-                <span id='lemma-text' style='float: left;'>Distribution of <span id='lemma' style="font-weight: bold"></span> (<span id="total"></span> occurrences in abridged RNC)</span>
-                <span id='aspect-text' style='float: right'>Aspect: <span id='aspect' style="font-weight: bold"></span></span>
-            </div>
-            <div id='output-placeholder' style='display: block'><br><br></div>
-            <div id="error" style="color: tomato; display: none">
-                <br>
-                <span>Word not found in the database. Try the infinitive form of the verb or an alternate spelling.</span>
-            </div>
+    <div class="row" style="background-color: white;">
+        <div class="col-md-4">
+            <h4 id='lemma-text' style='white-space: nowrap'>Distribution by number, gender, form, tense in the RNC:</h4>
+            <p>Input verb: <span id='input-word'></span></p>
+            <p style='white-space: nowrap'>Verb or aspect pair: <span id='lemma'></span></p>
+            <p id='verbaspect'></p>
         </div>
-    </div>
-    <div class='row'>
-        <div class='col-md-12'>
-            <div id="chart"></div>
-        </div>
+        <div class=col-md-8 id="chart"></div>
     </div>
 </div>
+
+<script src='aspect_verb_radar_chart.js'></script>
