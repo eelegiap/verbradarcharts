@@ -1,0 +1,116 @@
+<meta charset="utf-8">
+<title>Verb Radar Charts</title>
+<style>
+    h2 {
+        color: #777777
+    }
+
+    #main-content {
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 10px;
+        font-size: medium;
+    }
+
+    iframe.previewhtml {
+        padding: 5px;
+        width: 100%;
+        min-height: 15px;
+        max-width: 100%;
+        overflow: auto;
+    }
+
+    #contentinput {
+        overflow: auto;
+        resize: vertical;
+        font-size: 18px;
+    }
+
+    textarea#outputhtml {
+        white-space: pre;
+        width: 250px;
+        min-height: 15px;
+        /* border: 1px solid #888; */
+        padding: 5px;
+        outline: none;
+        overflow: auto;
+        font-size: 20px;
+        font-family: Monaco, courier;
+    }
+
+    .legend {
+        font-size: 15px;
+        font-family: sans-serif;
+    }
+
+    .tooltip {
+        font-size: 15px;
+        font-family: sans-serif;
+    }
+
+    button {
+        margin-right: 45px;
+    }
+
+    svg {
+        display: inline-block;
+    }
+</style>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="d3-5.15.0/d3.min.js"></script>
+
+<div id='main-content'>
+    <a name="top"></a>
+    <div class="row">
+        <!-- <div class="col-md-1"></div> -->
+        <div class="col-md-10 mt-3">
+            <h2>Verb Radar Charts</h2>
+            <p style="color: gray">
+                Word counts collected from the Morphological Standard Russian National Corpus, 2020,
+                <a href="https://ruscorpora.ru/new/en/index.html">https://ruscorpora.ru/new/en/index.html</a>.
+            </p>
+            <p>Words to try: пройти, смотреть, нравиться, есть, быть, взять</p>
+            <textarea id="contentinput" placeholder="Enter verb to generate radar chart"
+                style="min-height:25px; width: 100%;"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <!-- <div class="col-md-1"></div> -->
+        <div class="col-md-10">
+            <br>
+            <div class="form-group">
+                <button style='display: block' type="button" class="formbtn btn btn-lg btn-primary mt-2 mb-2"
+                    id="simple">
+                    Generate <span style='font-weight: bold;'>basic</span> chart<i id="processing_indicator"
+                        class="spinner-border" role="status" style="display:none;"></i></button>
+                <button style='display: none' type="button" class="formbtn btn btn-lg btn-primary mt-2 mb-2"
+                    id="detailed">
+                    Generate <span style='font-weight: bold;'>detailed</span> chart
+                    <i id="processing_indicator" class="spinner-border" role="status"
+                        style="display:none;"></i></button>
+                <span id="error" style="color: tomato; display: none">Word not found in the database. Try the infinitive
+                    form of the verb or an alternate spelling.</span>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="background-color: white;">
+        <div class="col-md-4">
+            <h4 id='lemma-text' style='white-space: nowrap'>Distribution by number, gender, form, tense in the RNC:</h4>
+            <p>Input verb: <span id='input-word'></span></p>
+            <p style='white-space: nowrap'>Verb or aspect pair: <span id='lemma'></span></p>
+            <p id='verbaspect'></p>
+        </div>
+        <div class=col-md-8 id="chart"></div>
+    </div>
+</div>
+
+<script src='aspect_verb_radar_chart.js'></script>

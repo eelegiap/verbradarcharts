@@ -5,7 +5,9 @@
         var index = lemma_lookup[input_text];
 
         if (index == undefined) {
+            draw_skeleton(data, lemma_lookup);
             $("#output").hide();
+            $('#output-placeholder').hide()
             $("#error").show();
             return false;
         }
@@ -15,11 +17,12 @@
         $("#lemma").text(input_text);
         $("#lemma-text").css('color', 'black');
         $("#output").show();
+        $('#output-placeholder').hide()
 
         if (complexity == 'simple') {
             // data
             var chart_data = [
-                radar_data.data[0].axes
+                radar_data.data[0].axes,
             ]
         } else {
             var chart_data = [
@@ -53,7 +56,7 @@
             ExtraWidthY: 100,
             color: d3.scaleOrdinal()
                 .domain([0, 1])
-                .range(["#AF5BA6"])
+                .range(['#ED7D31','#0086C0'])
         };
         var Format = d3.format("");
 
@@ -129,9 +132,9 @@
                 if (d.includes('conjugated')) {
                     var example = d.split('conjugated ')[1]
                     if (aspect == 'imperfective') {
-                        var new_label = 'present ' + example
+                        var new_label = 'present'
                     } else {
-                        var new_label = 'future ' + example
+                        var new_label = 'future'
                     }
                 } else {
                     var new_label = d
@@ -320,6 +323,7 @@
 
         if (index == undefined) {
             $("#output").hide();
+            $('#output-placeholder').hide()
             $("#error").show();
             return false;
         }
@@ -327,7 +331,8 @@
         var radar_data = data[index];
         $("#lemma-text").css('color', 'white');
         $("#aspect-text").css('color', 'white');
-        $("#output").show();
+        $('#output-placeholder').show()
+        $("#output").hide();
 
         // data
         var d = [
@@ -426,7 +431,7 @@
     $(document).ready(async function () {
         console.log("ready!");
         $("#output").hide();
-        $.getJSON("all-data_2-24.json", function (data) {
+        $.getJSON("all-data-granular_2-25.json", function (data) {
             var previous_input = ''
 
             // create lookup from lemma to array number to avoid looping every time

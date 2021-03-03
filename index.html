@@ -87,14 +87,15 @@
     <div class="row" style="background-color: white">
         <div class="col-md-1"></div>
         <div class="col-md-4 mt-3">
-            <div id="output" style="display: none">
+            <div id="output" style="display: none;">
                 <br>
-                <span id='lemma-text' style='float: left'>Distribution of <span id='lemma' style="font-weight: bold"></span> (<span id="total"></span> occurrences in abridged RNC)</span>
+                <span id='lemma-text' style='float: left;'>Distribution of <span id='lemma' style="font-weight: bold"></span> (<span id="total"></span> occurrences in abridged RNC)</span>
                 <span id='aspect-text' style='float: right'>Aspect: <span id='aspect' style="font-weight: bold"></span></span>
             </div>
-            <div id="error" style="color: gray; display: none">
-                <h5>Word not found in the database.</h5>
-                <h5>Try the infinitive form of the verb or an alternate spelling.</h5>
+            <div id='output-placeholder' style='display: block'><br><br></div>
+            <div id="error" style="color: tomato; display: none">
+                <br>
+                <span>Word not found in the database. Try the infinitive form of the verb or an alternate spelling.</span>
             </div>
         </div>
     </div>
