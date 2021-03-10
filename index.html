@@ -55,6 +55,28 @@
     svg {
         display: inline-block;
     }
+
+    #verb1 {
+        margin-right: 50px;
+    }
+
+    .toggle {
+        display: inline-block;
+        font-size: larger;
+        padding: 5px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        opacity: 0;
+        cursor: pointer;
+    }
+    #error {
+        color: tomato;
+        margin-top: 10px;
+        display: none;
+    }
+    #output {
+        display: none
+    }
 </style>
 
 <!-- Latest compiled and minified CSS -->
@@ -78,7 +100,6 @@
                 Word counts collected from the Morphological Standard Russian National Corpus, 2020,
                 <a href="https://ruscorpora.ru/new/en/index.html">https://ruscorpora.ru/new/en/index.html</a>.
             </p>
-            <p>Words to try: пройти, смотреть, нравиться, есть, быть, взять</p>
             <textarea id="contentinput" placeholder="Enter verb to generate radar chart"
                 style="min-height:25px; width: 100%;"></textarea>
         </div>
@@ -97,20 +118,40 @@
                     Generate <span style='font-weight: bold;'>detailed</span> chart
                     <i id="processing_indicator" class="spinner-border" role="status"
                         style="display:none;"></i></button>
-                <span id="error" style="color: tomato; display: none">Word not found in the database. Try the infinitive
-                    form of the verb or an alternate spelling.</span>
             </div>
+            <p><span id="error">Word not found in the database. Try the infinitive
+                form of the verb or an alternate spelling.</span></p>
         </div>
     </div>
     <div class="row" style="background-color: white;">
         <div class="col-md-4">
             <h4 id='lemma-text' style='white-space: nowrap'>Distribution by number, gender, form, tense in the RNC:</h4>
-            <p>Input verb: <span id='input-word'></span></p>
-            <p style='white-space: nowrap'>Verb or aspect pair: <span id='lemma'></span></p>
-            <p id='verbaspect'></p>
+            <p style='white-space: nowrap'>
+                <span style='color: #ED7D31'>Imperfective, </span>
+                <span style='color: #0086C0'>Perfective, </span>
+                <span style='color: #AF5BA6'>Biaspectual, </span>
+                <span style='color: gray'>No aspect defined</span>
+            </p> 
+            <hr>
+            <div id='output'>
+                <div class='toggle' id='verb1'></div>
+                <div class='toggle' id='verb2'></div>
+                <p><span style='font-weight: bold;'>Input verb: </span><span id='input-word'></span></p>
+                <p style='white-space: nowrap'><span style='font-weight: bold;'>Verb or aspect pair: </span><span id='pair'></span></p>
+                <p class='tr-output'>
+                    <span id='tr-label' style='font-weight: bold;'></span>
+                    <span id='tr'></span>
+                </p>
+                <br>
+                <div id='gauge' style='width: 150'></div>
+                <!-- <p id='vertexinfo'></p> -->
+                <!-- <p id='verbaspect'></p> -->
+            </div>
         </div>
-        <div class=col-md-8 id="chart"></div>
+        <div class=col-md-8 id="chart">
+        </div>
     </div>
 </div>
 
 <script src='aspect_verb_radar_chart.js'></script>
+<script src='gauges.js'></script>
